@@ -4,11 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script>
-      //
-      // TODO: Implement this function.
-      //
-      const makeInputVerifier = () => {
-        return () => {}
+      const makeInputVerifier = (min, max) => {
+        if (min > max) {
+              throw new Error("Minimum cannot be greater than maximum");
+          }
+
+          return function verify(inputValue) {
+              if (inputValue < min) {
+                  return "Input is less than minimum value";
+              } else if (inputValue >= min && inputValue <= max) {
+                  return "Input is in range";
+              } else {
+                  return "Input is more than maximum value";
+              }
+          };
       }
     </script>
   </head>
