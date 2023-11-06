@@ -4,10 +4,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script>
-      //
-      // TODO: Implement this function.
-      //
-      const transformObject = () => {}
+      const transformObject = (input) => {
+        if (typeof input === 'object') {
+              if (Array.isArray(input)) {
+                  // Transform each element in the array
+                  return input.map((item) => transformObject(item));
+              } else {
+                  // Transform object properties and nested objects
+                  const transformedObject = {};
+                  for (key in input) {
+                      transformedObject[key] = transformObject(input[key]);
+                  }
+                  return transformedObject;
+              }
+          } else if (typeof input === 'number') {
+              // Increment numbers by 6
+              return input + 6;
+          } else if (typeof input === 'string') {
+              // Append " BLARGH" to strings
+              return input + " BLARGH";
+          } else {
+              // Return other types as is
+              return input;
+          }
+      }
     </script>
   </head>
 
